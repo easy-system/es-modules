@@ -12,7 +12,7 @@ namespace Es\Modules;
 /**
  * The interface of collection of modules.
  */
-interface ModulesInterface extends \Countable, \IteratorAggregate
+interface ModulesInterface extends \Countable, \Iterator
 {
     /**
      * Sets the module.

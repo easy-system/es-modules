@@ -9,20 +9,17 @@
  */
 namespace Es\Modules;
 
-use ArrayIterator;
+use Es\Container\AbstractContainer;
+use Es\Container\Countable\CountableTrait;
+use Es\Container\Iterator\IteratorTrait;
 use RuntimeException;
 
 /**
  * The collection of modules.
  */
-class Modules implements ModulesInterface
+class Modules extends AbstractContainer implements ModulesInterface
 {
-    /**
-     * The modules.
-     *
-     * @var array
-     */
-    protected $modules = [];
+    use CountableTrait, IteratorTrait;
 
     /**
      * Sets the module.
@@ -34,7 +31,7 @@ class Modules implements ModulesInterface
      */
     public function set($name, AbstractModule $module)
     {
-        $this->modules[(string) $name] = $module;
+        $this->container[(string) $name] = $module;
 
         return $this;
     }
@@ -48,8 +45,8 @@ class Modules implements ModulesInterface
      */
     public function remove($name)
     {
-        if (isset($this->modules[$name])) {
-            unset($this->modules[$name]);
+        if (isset($this->container[$name])) {
+            unset($this->container[$name]);
         }
 
         return $this;
@@ -64,7 +61,7 @@ class Modules implements ModulesInterface
      */
     public function has($name)
     {
-        return isset($this->modules[$name]);
+        return isset($this->container[$name]);
     }
 
     /**
@@ -78,7 +75,7 @@ class Modules implements ModulesInterface
      */
     public function get($name)
     {
-        if (! isset($this->modules[$name])) {
+        if (! isset($this->container[$name])) {
             throw new RuntimeException(
                 sprintf(
                     'Module "%s" is not found',
@@ -87,26 +84,6 @@ class Modules implements ModulesInterface
             );
         }
 
-        return $this->modules[$name];
-    }
-
-    /**
-     * Gets count of modules.
-     *
-     * @return int The number of modules
-     */
-    public function count()
-    {
-        return count($this->modules);
-    }
-
-    /**
-     * Gets iterator.
-     *
-     * @return \ArrayIterator The iterator
-     */
-    public function getIterator()
-    {
-        return new ArrayIterator($this->modules);
+        return $this->container[$name];
     }
 }
