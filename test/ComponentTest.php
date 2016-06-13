@@ -35,6 +35,13 @@ class ComponentTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testGetListenersConfig()
+    {
+        $component = new Component();
+        $config    = $component->getListenersConfig();
+        $this->assertInternalType('array', $config);
+    }
+
     public function testGetEventsConfig()
     {
         $component = new Component();

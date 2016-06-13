@@ -24,7 +24,14 @@ class Component implements ComponentInterface
      */
     protected $servicesConfig = [
         'Modules' => 'Es\Modules\Modules',
-        //
+    ];
+
+    /**
+     * The configuration of listeners.
+     *
+     * @var array
+     */
+    protected $listenersConfig = [
         'Es.Modules.Listener.EventDispatcher'              => 'Es\Modules\Listener\EventDispatcher',
         'Es.Modules.Listener.LoaderListener'               => 'Es\Modules\Listener\LoaderListener',
         'Es.Modules.Listener.RegistrationListener'         => 'Es\Modules\Listener\RegistrationListener',
@@ -32,10 +39,8 @@ class Component implements ComponentInterface
         'Es.Modules.Listener.ConfigReaderAutoloadListener' => 'Es\Modules\Listener\ConfigReaderAutoloadListener',
         'Es.Modules.Listener.ConfigReaderModulesListener'  => 'Es\Modules\Listener\ConfigReaderModulesListener',
         'Es.Modules.Listener.BootstrapListener'            => 'Es\Modules\Listener\BootstrapListener',
-        //
-        'Es.Modules.Listener.ConfigureServicesListener' => 'Es\Modules\Listener\ConfigureServicesListener',
-        'Es.Modules.Listener.ConfigureEventsListener'   => 'Es\Modules\Listener\ConfigureEventsListener',
-
+        'Es.Modules.Listener.ConfigureServicesListener'    => 'Es\Modules\Listener\ConfigureServicesListener',
+        'Es.Modules.Listener.ConfigureEventsListener'      => 'Es\Modules\Listener\ConfigureEventsListener',
     ];
 
     /**
@@ -131,6 +136,16 @@ class Component implements ComponentInterface
     public function getServicesConfig()
     {
         return $this->servicesConfig;
+    }
+
+    /**
+     * Gets the configuration of listeners.
+     *
+     * @return array
+     */
+    public function getListenersConfig()
+    {
+        return $this->listenersConfig;
     }
 
     /**
