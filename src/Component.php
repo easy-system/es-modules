@@ -40,6 +40,7 @@ class Component implements ComponentInterface
         'Es.Modules.Listener.ConfigReaderModulesListener'  => 'Es\Modules\Listener\ConfigReaderModulesListener',
         'Es.Modules.Listener.BootstrapListener'            => 'Es\Modules\Listener\BootstrapListener',
         'Es.Modules.Listener.ConfigureServicesListener'    => 'Es\Modules\Listener\ConfigureServicesListener',
+        'Es.Modules.Listener.ConfigureListenersListener'   => 'Es\Modules\Listener\ConfigureListenersListener',
         'Es.Modules.Listener.ConfigureEventsListener'      => 'Es\Modules\Listener\ConfigureEventsListener',
     ];
 
@@ -94,6 +95,12 @@ class Component implements ComponentInterface
         'ConfigureServicesListener::__invoke' => [
             ModulesEvent::APPLY_CONFIG,
             'Es.Modules.Listener.ConfigureServicesListener',
+            '__invoke',
+            11000
+        ],
+        'ConfigureListenersListener::__invoke' => [
+            ModulesEvent::APPLY_CONFIG,
+            'Es.Modules.Listener.ConfigureListenersListener',
             '__invoke',
             10000
         ],
