@@ -11,7 +11,6 @@ namespace Es\Modules\Listener;
 
 use Es\Events\EventsTrait;
 use Es\Modules\ModulesEvent;
-use Es\Services\ServicesTrait;
 use Es\System\SystemEvent;
 
 /**
@@ -19,7 +18,7 @@ use Es\System\SystemEvent;
  */
 class EventDispatcher
 {
-    use EventsTrait, ServicesTrait;
+    use EventsTrait;
 
     /**
      * The modules event.

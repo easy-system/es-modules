@@ -12,7 +12,7 @@ namespace Es\Modules\Listener;
 use Es\Loader\ModuleLoader;
 use Es\Modules\ModulesEvent;
 use Es\Modules\ModulesTrait;
-use Es\Services\ServicesTrait;
+use Es\Services\Provider;
 use Es\System\ConfigTrait;
 
 /**
@@ -20,14 +20,7 @@ use Es\System\ConfigTrait;
  */
 class LoaderListener
 {
-    use ConfigTrait, ModulesTrait, ServicesTrait;
-
-    /**
-     * The loader of Module classes.
-     *
-     * @var \Es\Loader\ModuleLoader
-     */
-    protected $loader;
+    use ConfigTrait, ModulesTrait;
 
     /**
      * Sets the loader.
@@ -36,7 +29,7 @@ class LoaderListener
      */
     public function setLoader(ModuleLoader $loader)
     {
-        $this->loader = $loader;
+        Provider::getServices()->set('ModuleLoader', $loader);
     }
 
     /**
@@ -46,13 +39,7 @@ class LoaderListener
      */
     public function getLoader()
     {
-        if (! $this->loader) {
-            $services = $this->getServices();
-            $loader   = $services->get('ModuleLoader');
-            $this->setLoader($loader);
-        }
-
-        return $this->loader;
+        return Provider::getServices()->get('ModuleLoader');
     }
 
     /**

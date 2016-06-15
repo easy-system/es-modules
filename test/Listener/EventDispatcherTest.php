@@ -12,7 +12,6 @@ namespace Es\Modules\Test\Listener;
 use Es\Events\Events;
 use Es\Modules\Listener\EventDispatcher;
 use Es\Modules\ModulesEvent;
-use Es\Services\Services;
 use Es\System\SystemEvent;
 
 class EventDispatcherTest extends \PHPUnit_Framework_TestCase
@@ -34,7 +33,6 @@ class EventDispatcherTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         $dispatcher = new EventDispatcher();
-        $dispatcher->setServices(new Services());
 
         $events = $this->getMock(Events::CLASS);
         $dispatcher->setEvents($events);

@@ -14,6 +14,7 @@ use Es\Modules\AbstractModule;
 use Es\Modules\Listener\RegistrationListener;
 use Es\Modules\Modules;
 use Es\Modules\ModulesEvent;
+use Es\Services\Provider;
 use Es\Services\Services;
 
 class RegistrationListenerTest extends \PHPUnit_Framework_TestCase
@@ -23,17 +24,21 @@ class RegistrationListenerTest extends \PHPUnit_Framework_TestCase
         $loader   = new ClassLoader();
         $services = new Services();
         $services->set('ClassLoader', $loader);
+
+        Provider::setServices($services);
         $listener = new RegistrationListener();
-        $listener->setServices($services);
         $this->assertSame($loader, $listener->getLoader());
     }
 
     public function testSetLoader()
     {
+        $services = new Services();
+        Provider::setServices($services);
+
         $loader   = new ClassLoader();
         $listener = new RegistrationListener();
         $listener->setLoader($loader);
-        $this->assertSame($loader, $listener->getLoader());
+        $this->assertSame($loader, $services->get('ClassLoader'));
     }
 
     public function testInvoke()

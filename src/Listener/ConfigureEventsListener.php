@@ -11,7 +11,6 @@ namespace Es\Modules\Listener;
 
 use Es\Events\EventsTrait;
 use Es\Modules\ModulesEvent;
-use Es\Services\ServicesTrait;
 use Es\System\ConfigTrait;
 
 /**
@@ -19,7 +18,7 @@ use Es\System\ConfigTrait;
  */
 class ConfigureEventsListener
 {
-    use ConfigTrait, EventsTrait, ServicesTrait;
+    use ConfigTrait, EventsTrait;
 
     /**
      * Configures the events.

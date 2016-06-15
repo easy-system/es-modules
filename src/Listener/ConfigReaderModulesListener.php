@@ -11,7 +11,6 @@ namespace Es\Modules\Listener;
 
 use Es\Modules\ModulesEvent;
 use Es\Modules\ModulesTrait;
-use Es\Services\ServicesTrait;
 use Es\System\ConfigTrait;
 
 /**
@@ -19,7 +18,7 @@ use Es\System\ConfigTrait;
  */
 class ConfigReaderModulesListener
 {
-    use ConfigTrait, ModulesTrait, ServicesTrait;
+    use ConfigTrait, ModulesTrait;
 
     /**
      * Reads the system configuration from modules and merges it.

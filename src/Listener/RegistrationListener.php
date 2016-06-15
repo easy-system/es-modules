@@ -12,7 +12,7 @@ namespace Es\Modules\Listener;
 use Es\Loader\ClassLoader;
 use Es\Modules\ModulesEvent;
 use Es\Modules\ModulesTrait;
-use Es\Services\ServicesTrait;
+use Es\Services\Provider;
 
 /**
  * Registers paths to the module classes in system class loader.
@@ -21,14 +21,7 @@ use Es\Services\ServicesTrait;
  */
 class RegistrationListener
 {
-    use ModulesTrait, ServicesTrait;
-
-    /**
-     * The class loader.
-     *
-     * @var \Es\Loader\ClassLoader
-     */
-    protected $loader;
+    use ModulesTrait;
 
     /**
      * Sets the class loader.
@@ -37,7 +30,7 @@ class RegistrationListener
      */
     public function setLoader(ClassLoader $loader)
     {
-        $this->loader = $loader;
+        Provider::getServices()->set('ClassLoader', $loader);
     }
 
     /**
@@ -47,13 +40,7 @@ class RegistrationListener
      */
     public function getLoader()
     {
-        if (! $this->loader) {
-            $services = $this->getServices();
-            $loader   = $services->get('ClassLoader');
-            $this->setLoader($loader);
-        }
-
-        return $this->loader;
+        return Provider::getServices()->get('ClassLoader');
     }
 
     /**
