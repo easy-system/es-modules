@@ -18,24 +18,6 @@ use Es\System\SystemConfig;
 
 class LoaderListenerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetModules()
-    {
-        $modules  = new Modules();
-        $services = new Services();
-        $services->set('Modules', $modules);
-        $listener = new LoaderListener();
-        $listener->setServices($services);
-        $this->assertSame($modules, $listener->getModules());
-    }
-
-    public function testSetModules()
-    {
-        $modules  = new Modules();
-        $listener = new LoaderListener();
-        $listener->setModules($modules);
-        $this->assertSame($modules, $listener->getModules());
-    }
-
     public function testGetLoader()
     {
         $loader   = new ModuleLoader();
@@ -52,24 +34,6 @@ class LoaderListenerTest extends \PHPUnit_Framework_TestCase
         $listener = new LoaderListener();
         $listener->setLoader($loader);
         $this->assertSame($loader, $listener->getLoader());
-    }
-
-    public function testGetConfig()
-    {
-        $config   = new SystemConfig();
-        $services = new Services();
-        $services->set('Config', $config);
-        $listener = new LoaderListener();
-        $listener->setServices($services);
-        $this->assertSame($config, $listener->getConfig());
-    }
-
-    public function testSetConfig()
-    {
-        $config   = new SystemConfig();
-        $listener = new LoaderListener();
-        $listener->setConfig($config);
-        $this->assertSame($config, $listener->getConfig());
     }
 
     public function testInvoke()

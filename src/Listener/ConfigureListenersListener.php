@@ -9,83 +9,17 @@
  */
 namespace Es\Modules\Listener;
 
-use Es\Events\ListenersInterface;
+use Es\Events\ListenersTrait;
 use Es\Modules\ModulesEvent;
 use Es\Services\ServicesTrait;
-use Es\System\ConfigInterface;
+use Es\System\ConfigTrait;
 
 /**
  * Configures listeners, when the configurations is already merged.
  */
 class ConfigureListenersListener
 {
-    use ServicesTrait;
-
-    /**
-     * The listeners.
-     *
-     * @var \Es\Events\ListenersInterface
-     */
-    protected $listeners;
-
-    /**
-     * The system configuration.
-     *
-     * @var \Es\System\Config
-     */
-    protected $config;
-
-    /**
-     * Sets the listeners.
-     *
-     * @param \Es\Events\ListenersInterface $listeners The listeners
-     */
-    public function setListeners(ListenersInterface $listeners)
-    {
-        $this->listeners = $listeners;
-    }
-
-    /**
-     * Gets the listeners.
-     *
-     * @return \Es\Events\ListenersInterface The listeners
-     */
-    public function getListeners()
-    {
-        if (! $this->listeners) {
-            $services  = $this->getServices();
-            $listeners = $services->get('Listeners');
-            $this->setListeners($listeners);
-        }
-
-        return $this->listeners;
-    }
-
-    /**
-     * Sets the configuration.
-     *
-     * @param \Es\System\ConfigInterface $config The system configuration
-     */
-    public function setConfig(ConfigInterface $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
-     * Gets the configuration.
-     *
-     * @return \Es\System\Config The system configuration
-     */
-    public function getConfig()
-    {
-        if (! $this->config) {
-            $services = $this->getServices();
-            $config   = $services->get('Config');
-            $this->setConfig($config);
-        }
-
-        return $this->config;
-    }
+    use ConfigTrait, ListenersTrait, ServicesTrait;
 
     /**
      * Configures the listeners.

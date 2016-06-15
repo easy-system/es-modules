@@ -17,29 +17,10 @@ use Es\System\SystemEvent;
 
 class EventDispatcherTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetEvents()
-    {
-        $events   = new Events();
-        $services = new Services();
-        $services->set('Events', $events);
-
-        $dispatcher = new EventDispatcher();
-        $dispatcher->setServices($services);
-        $this->assertSame($events, $dispatcher->getEvents());
-    }
-
-    public function testSetEvents()
-    {
-        $events     = new Events();
-        $dispatcher = new EventDispatcher();
-        $dispatcher->setEvents($events);
-        $this->assertSame($events, $dispatcher->getEvents());
-    }
-
     public function testGetEvent()
     {
         $dispatcher = new EventDispatcher();
-        $this->assertInstanceOf('Es\Modules\ModulesEvent', $dispatcher->getEvent());
+        $this->assertInstanceOf(ModulesEvent::CLASS, $dispatcher->getEvent());
     }
 
     public function testSetEvent()
@@ -53,7 +34,9 @@ class EventDispatcherTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         $dispatcher = new EventDispatcher();
-        $events     = $this->getMock('Es\Events\Events');
+        $dispatcher->setServices(new Services());
+
+        $events = $this->getMock(Events::CLASS);
         $dispatcher->setEvents($events);
 
         $expects = [

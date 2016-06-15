@@ -10,7 +10,7 @@
 namespace Es\Modules\Listener;
 
 use Es\Modules\ModulesEvent;
-use Es\Modules\ModulesInterface;
+use Es\Modules\ModulesTrait;
 use Es\Services\ServicesTrait;
 
 /**
@@ -18,40 +18,7 @@ use Es\Services\ServicesTrait;
  */
 class BootstrapListener
 {
-    use ServicesTrait;
-
-    /**
-     * The modules.
-     *
-     * @var \Es\Modules\ModulesInterface
-     */
-    protected $modules;
-
-    /**
-     * Sets the modules.
-     *
-     * @param \Es\Modules\ModulesInterface $modules The modules
-     */
-    public function setModules(ModulesInterface $modules)
-    {
-        $this->modules = $modules;
-    }
-
-    /**
-     * Gets the modules.
-     *
-     * @return \Es\Modules\ModulesInterface The modules
-     */
-    public function getModules()
-    {
-        if (! $this->modules) {
-            $services = $this->getServices();
-            $modules  = $services->get('Modules');
-            $this->setModules($modules);
-        }
-
-        return $this->modules;
-    }
+    use ModulesTrait, ServicesTrait;
 
     /**
      * Calls the bootstrap method of each module.

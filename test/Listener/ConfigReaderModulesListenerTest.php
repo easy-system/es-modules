@@ -12,7 +12,6 @@ namespace Es\Modules\Test\Listener;
 use Es\Modules\Listener\ConfigReaderModulesListener;
 use Es\Modules\Modules;
 use Es\Modules\ModulesEvent;
-use Es\Services\Services;
 use Es\System\SystemConfig;
 
 class ConfigReaderModulesListenerTest extends \PHPUnit_Framework_TestCase
@@ -23,42 +22,6 @@ class ConfigReaderModulesListenerTest extends \PHPUnit_Framework_TestCase
         $foo    = $files . DIRECTORY_SEPARATOR . 'Foo';
         $module = $foo . DIRECTORY_SEPARATOR . 'Module.php';
         require_once $module;
-    }
-
-    public function testGetModules()
-    {
-        $modules  = new Modules();
-        $services = new Services();
-        $services->set('Modules', $modules);
-        $listener = new ConfigReaderModulesListener();
-        $listener->setServices($services);
-        $this->assertSame($modules, $listener->getModules());
-    }
-
-    public function testSetModules()
-    {
-        $modules  = new Modules();
-        $listener = new ConfigReaderModulesListener();
-        $listener->setModules($modules);
-        $this->assertSame($modules, $listener->getModules());
-    }
-
-    public function testGetConfig()
-    {
-        $config   = new SystemConfig();
-        $services = new Services();
-        $services->set('Config', $config);
-        $listener = new ConfigReaderModulesListener();
-        $listener->setServices($services);
-        $this->assertSame($config, $listener->getConfig());
-    }
-
-    public function testSetConfig()
-    {
-        $config   = new SystemConfig();
-        $listener = new ConfigReaderModulesListener();
-        $listener->setConfig($config);
-        $this->assertSame($config, $listener->getConfig());
     }
 
     public function testInvoke()

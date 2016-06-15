@@ -16,24 +16,6 @@ use Es\System\SystemConfig;
 
 class ConfigureServicesListenerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetConfig()
-    {
-        $config   = new SystemConfig();
-        $services = new Services();
-        $services->set('Config', $config);
-        $listener = new ConfigureServicesListener();
-        $listener->setServices($services);
-        $this->assertSame($config, $listener->getConfig());
-    }
-
-    public function testSetConfig()
-    {
-        $config   = new SystemConfig();
-        $listener = new ConfigureServicesListener();
-        $listener->setConfig($config);
-        $this->assertSame($config, $listener->getConfig());
-    }
-
     public function testInvoke()
     {
         $servicesConfig = [
@@ -43,7 +25,7 @@ class ConfigureServicesListenerTest extends \PHPUnit_Framework_TestCase
         $config             = new SystemConfig();
         $config['services'] = $servicesConfig;
 
-        $services = $this->getMock('Es\Services\Services');
+        $services = $this->getMock(Services::CLASS, ['add']);
         $listener = new ConfigureServicesListener();
         $listener->setServices($services);
         $listener->setConfig($config);

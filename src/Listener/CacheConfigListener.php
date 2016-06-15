@@ -12,7 +12,7 @@ namespace Es\Modules\Listener;
 use Es\Cache\Adapter\AbstractCache;
 use Es\Modules\ModulesEvent;
 use Es\Services\ServicesTrait;
-use Es\System\ConfigInterface;
+use Es\System\ConfigTrait;
 
 /**
  * Stores the system configuration in cache and restores it, if the
@@ -20,7 +20,7 @@ use Es\System\ConfigInterface;
  */
 class CacheConfigListener
 {
-    use ServicesTrait;
+    use ConfigTrait, ServicesTrait;
 
     /**
      * The cache adapter.
@@ -28,13 +28,6 @@ class CacheConfigListener
      * @var \Es\Cache\Adapter\AbstractCache
      */
     protected $cache;
-
-    /**
-     * The system configuration.
-     *
-     * @var \Es\System\Config
-     */
-    protected $config;
 
     /**
      * Sets the cache.
@@ -63,32 +56,6 @@ class CacheConfigListener
     }
 
     /**
-     * Sets the configuration.
-     *
-     * @param \Es\System\ConfigInterface $config The system configuration
-     */
-    public function setConfig(ConfigInterface $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
-     * Gets the configuration.
-     *
-     * @return \Es\System\Config The system configuration
-     */
-    public function getConfig()
-    {
-        if (! $this->config) {
-            $services = $this->getServices();
-            $config   = $services->get('Config');
-            $this->setConfig($config);
-        }
-
-        return $this->config;
-    }
-
-    /**
      * Restores the system configuration from cache.
      *
      * @param \Es\Modules\ModulesEvent $event The modules event
@@ -96,16 +63,12 @@ class CacheConfigListener
     public function doRestore(ModulesEvent $event)
     {
         $cache = $this->getCache();
-        if (! $cache->isEnabled()) {
-            return;
+        $data  = $cache->get('config');
+        if ($data) {
+            $services = $this->getServices();
+            $services->set('Config', $data);
+            $event->stopPropagation(true);
         }
-        $data = $cache->get('config');
-        if (! $data) {
-            return;
-        }
-        $services = $this->getServices();
-        $services->set('Config', $data);
-        $event->stopPropagation(true);
     }
 
     /**
@@ -115,10 +78,7 @@ class CacheConfigListener
      */
     public function doStore(ModulesEvent $event)
     {
-        $cache = $this->getCache();
-        if (! $cache->isEnabled()) {
-            return;
-        }
+        $cache  = $this->getCache();
         $config = $this->getConfig();
         $cache->set('config', $config);
     }

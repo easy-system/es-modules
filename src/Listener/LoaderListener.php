@@ -11,23 +11,16 @@ namespace Es\Modules\Listener;
 
 use Es\Loader\ModuleLoader;
 use Es\Modules\ModulesEvent;
-use Es\Modules\ModulesInterface;
+use Es\Modules\ModulesTrait;
 use Es\Services\ServicesTrait;
-use Es\System\ConfigInterface;
+use Es\System\ConfigTrait;
 
 /**
  * Loads the modules specified in the system configuration.
  */
 class LoaderListener
 {
-    use ServicesTrait;
-
-    /**
-     * The modules.
-     *
-     * @var \Es\Modules\ModulesInterface
-     */
-    protected $modules;
+    use ConfigTrait, ModulesTrait, ServicesTrait;
 
     /**
      * The loader of Module classes.
@@ -35,39 +28,6 @@ class LoaderListener
      * @var \Es\Loader\ModuleLoader
      */
     protected $loader;
-
-    /**
-     * The system configuration.
-     *
-     * @var \Es\System\Config
-     */
-    protected $config;
-
-    /**
-     * Sets the modules.
-     *
-     * @param \Es\Modules\ModulesInterface $modules The modules
-     */
-    public function setModules(ModulesInterface $modules)
-    {
-        $this->modules = $modules;
-    }
-
-    /**
-     * Gets the modules.
-     *
-     * @return \Es\Modules\ModulesInterface The modules
-     */
-    public function getModules()
-    {
-        if (! $this->modules) {
-            $services = $this->getServices();
-            $modules  = $services->get('Modules');
-            $this->setModules($modules);
-        }
-
-        return $this->modules;
-    }
 
     /**
      * Sets the loader.
@@ -93,32 +53,6 @@ class LoaderListener
         }
 
         return $this->loader;
-    }
-
-    /**
-     * Sets the system configuration.
-     *
-     * @param \Es\System\ConfigInterface $config The system configuration
-     */
-    public function setConfig(ConfigInterface $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
-     * Gets the system configuration.
-     *
-     * @return \Es\System\Config The system configuration
-     */
-    public function getConfig()
-    {
-        if (! $this->config) {
-            $services = $this->getServices();
-            $config   = $services->get('Config');
-            $this->setConfig($config);
-        }
-
-        return $this->config;
     }
 
     /**

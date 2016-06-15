@@ -12,29 +12,10 @@ namespace Es\Modules\Test\Listener;
 use Es\Loader\Normalizer;
 use Es\Modules\Listener\ConfigReaderAutoloadListener;
 use Es\Modules\ModulesEvent;
-use Es\Services\Services;
 use Es\System\SystemConfig;
 
 class ConfigReaderAutoloadListenerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetConfig()
-    {
-        $config   = new SystemConfig();
-        $services = new Services();
-        $services->set('Config', $config);
-        $listener = new ConfigReaderAutoloadListener();
-        $listener->setServices($services);
-        $this->assertSame($config, $listener->getConfig());
-    }
-
-    public function testSetConfig()
-    {
-        $config   = new SystemConfig();
-        $listener = new ConfigReaderAutoloadListener();
-        $listener->setConfig($config);
-        $this->assertSame($config, $listener->getConfig());
-    }
-
     public function invalidAutoloadDirDataProvider()
     {
         $dirs = [

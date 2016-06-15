@@ -9,7 +9,7 @@
  */
 namespace Es\Modules\Listener;
 
-use Es\Events\EventsInterface;
+use Es\Events\EventsTrait;
 use Es\Modules\ModulesEvent;
 use Es\Services\ServicesTrait;
 use Es\System\SystemEvent;
@@ -19,14 +19,7 @@ use Es\System\SystemEvent;
  */
 class EventDispatcher
 {
-    use ServicesTrait;
-
-    /**
-     * The events.
-     *
-     * @var \Es\Events\EventsInterface
-     */
-    protected $events;
+    use EventsTrait, ServicesTrait;
 
     /**
      * The modules event.
@@ -34,32 +27,6 @@ class EventDispatcher
      * @var \Es\Modules\ModulesEvent
      */
     protected $event;
-
-    /**
-     * Sets the events.
-     *
-     * @param \Es\Events\EventsInterface $events The events
-     */
-    public function setEvents(EventsInterface $events)
-    {
-        $this->events = $events;
-    }
-
-    /**
-     * Gets the events.
-     *
-     * @return \Es\Events\EventsInterface The events
-     */
-    public function getEvents()
-    {
-        if (! $this->events) {
-            $services = $this->getServices();
-            $events   = $services->get('Events');
-            $this->setEvents($events);
-        }
-
-        return $this->events;
-    }
 
     /**
      * Sets the modules event.

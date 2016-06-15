@@ -11,47 +11,14 @@ namespace Es\Modules\Listener;
 
 use Es\Modules\ModulesEvent;
 use Es\Services\ServicesTrait;
-use Es\System\ConfigInterface;
+use Es\System\ConfigTrait;
 
 /**
  * Configures services, when the configurations is already merged.
  */
 class ConfigureServicesListener
 {
-    use ServicesTrait;
-
-    /**
-     * The system configuration.
-     *
-     * @var \Es\System\Config
-     */
-    protected $config;
-
-    /**
-     * Sets the configuration.
-     *
-     * @param \Es\System\ConfigInterface $config The system configuration
-     */
-    public function setConfig(ConfigInterface $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
-     * Gets the configuration.
-     *
-     * @return \Es\System\Config The system configuration
-     */
-    public function getConfig()
-    {
-        if (! $this->config) {
-            $services = $this->getServices();
-            $config   = $services->get('Config');
-            $this->setConfig($config);
-        }
-
-        return $this->config;
-    }
+    use ConfigTrait, ServicesTrait;
 
     /**
      * Configures the services.

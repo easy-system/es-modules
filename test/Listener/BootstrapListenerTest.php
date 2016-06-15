@@ -9,35 +9,18 @@
  */
 namespace Es\Modules\Test\Listener;
 
+use Es\Modules\AbstractModule;
 use Es\Modules\Listener\BootstrapListener;
 use Es\Modules\Modules;
 use Es\Modules\ModulesEvent;
-use Es\Services\Services;
+use Es\Services\ServicesInterface;
 
 class BootstrapListenerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetModules()
-    {
-        $modules  = new Modules();
-        $services = new Services();
-        $services->set('Modules', $modules);
-        $listener = new BootstrapListener();
-        $listener->setServices($services);
-        $this->assertSame($modules, $listener->getModules());
-    }
-
-    public function testSetModules()
-    {
-        $modules  = new Modules();
-        $listener = new BootstrapListener();
-        $listener->setModules($modules);
-        $this->assertSame($modules, $listener->getModules());
-    }
-
     public function testInvoke()
     {
         $modules = new Modules();
-        $module  = $this->getMock('Es\Modules\AbstractModule');
+        $module  = $this->getMock(AbstractModule::CLASS);
         $modules->set('foo', $module);
         $listener = new BootstrapListener();
         $listener->setModules($modules);
@@ -45,7 +28,7 @@ class BootstrapListenerTest extends \PHPUnit_Framework_TestCase
         $module
             ->expects($this->once())
             ->method('bootstrap')
-            ->with($this->isInstanceOf('Es\Services\ServicesInterface'));
+            ->with($this->isInstanceOf(ServicesInterface::CLASS));
 
         $listener(new ModulesEvent());
     }

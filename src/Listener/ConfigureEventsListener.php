@@ -9,83 +9,17 @@
  */
 namespace Es\Modules\Listener;
 
-use Es\Events\EventsInterface;
+use Es\Events\EventsTrait;
 use Es\Modules\ModulesEvent;
 use Es\Services\ServicesTrait;
-use Es\System\ConfigInterface;
+use Es\System\ConfigTrait;
 
 /**
  * Configure events, when the configurations is already merged.
  */
 class ConfigureEventsListener
 {
-    use ServicesTrait;
-
-    /**
-     * The events.
-     *
-     * @var \Es\Events\EventsInterface
-     */
-    protected $events;
-
-    /**
-     * The system configuration.
-     *
-     * @var \Es\System\Config
-     */
-    protected $config;
-
-    /**
-     * Sets the events.
-     *
-     * @param \Es\Events\EventsInterface $events The events
-     */
-    public function setEvents(EventsInterface $events)
-    {
-        $this->events = $events;
-    }
-
-    /**
-     * Gets the events.
-     *
-     * @return \Es\Events\EventsInterface The events
-     */
-    public function getEvents()
-    {
-        if (! $this->events) {
-            $services = $this->getServices();
-            $events   = $services->get('Events');
-            $this->setEvents($events);
-        }
-
-        return $this->events;
-    }
-
-    /**
-     * Sets the configuration.
-     *
-     * @param \Es\System\ConfigInterface $config The system configuration
-     */
-    public function setConfig(ConfigInterface $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
-     * Gets the configuration.
-     *
-     * @return \Es\System\Config The system configuration
-     */
-    public function getConfig()
-    {
-        if (! $this->config) {
-            $services = $this->getServices();
-            $config   = $services->get('Config');
-            $this->setConfig($config);
-        }
-
-        return $this->config;
-    }
+    use ConfigTrait, EventsTrait, ServicesTrait;
 
     /**
      * Configures the events.
@@ -102,6 +36,5 @@ class ConfigureEventsListener
                 call_user_func_array([$events, 'attach'], $item);
             }
         }
-
     }
 }

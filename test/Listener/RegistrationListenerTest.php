@@ -10,6 +10,7 @@
 namespace Es\Modules\Test\Listener;
 
 use Es\Loader\ClassLoader;
+use Es\Modules\AbstractModule;
 use Es\Modules\Listener\RegistrationListener;
 use Es\Modules\Modules;
 use Es\Modules\ModulesEvent;
@@ -17,24 +18,6 @@ use Es\Services\Services;
 
 class RegistrationListenerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetModules()
-    {
-        $modules  = new Modules();
-        $services = new Services();
-        $services->set('Modules', $modules);
-        $listener = new RegistrationListener();
-        $listener->setServices($services);
-        $this->assertSame($modules, $listener->getModules());
-    }
-
-    public function testSetModules()
-    {
-        $modules  = new Modules();
-        $listener = new RegistrationListener();
-        $listener->setModules($modules);
-        $this->assertSame($modules, $listener->getModules());
-    }
-
     public function testGetLoader()
     {
         $loader   = new ClassLoader();
@@ -55,10 +38,10 @@ class RegistrationListenerTest extends \PHPUnit_Framework_TestCase
 
     public function testInvoke()
     {
-        $module = $this->getMock('Es\Modules\AbstractModule');
+        $module = $this->getMock(AbstractModule::CLASS);
         $src    = $module->getModuleDir() . DIRECTORY_SEPARATOR . 'src';
 
-        $loader  = $this->getMock('Es\Loader\ClassLoader');
+        $loader  = $this->getMock(ClassLoader::CLASS);
         $modules = new Modules();
         $modules->set('foo', $module);
 

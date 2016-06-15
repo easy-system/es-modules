@@ -12,7 +12,7 @@ namespace Es\Modules\Listener;
 use Es\Loader\Normalizer;
 use Es\Modules\ModulesEvent;
 use Es\Services\ServicesTrait;
-use Es\System\ConfigInterface;
+use Es\System\ConfigTrait;
 use InvalidArgumentException;
 
 /**
@@ -21,14 +21,7 @@ use InvalidArgumentException;
  */
 class ConfigReaderAutoloadListener
 {
-    use ServicesTrait;
-
-    /**
-     * The system configuration.
-     *
-     * @var \Es\System\Config
-     */
-    protected $config;
+    use ConfigTrait, ServicesTrait;
 
     /**
      * The directory for autoloading of configuration files.
@@ -36,32 +29,6 @@ class ConfigReaderAutoloadListener
      * @var string
      */
     protected $autoloadDir = 'config/autoload/';
-
-    /**
-     * Sets the configuration.
-     *
-     * @param \Es\System\ConfigInterface $config The system configuration
-     */
-    public function setConfig(ConfigInterface $config)
-    {
-        $this->config = $config;
-    }
-
-    /**
-     * Gets the configuration.
-     *
-     * @return \Es\System\Config The system configuration
-     */
-    public function getConfig()
-    {
-        if (! $this->config) {
-            $services = $this->getServices();
-            $config   = $services->get('Config');
-            $this->setConfig($config);
-        }
-
-        return $this->config;
-    }
 
     /**
      * Sets the directory for autoloading of configuration files.

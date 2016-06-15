@@ -11,7 +11,7 @@ namespace Es\Modules\Listener;
 
 use Es\Loader\ClassLoader;
 use Es\Modules\ModulesEvent;
-use Es\Modules\ModulesInterface;
+use Es\Modules\ModulesTrait;
 use Es\Services\ServicesTrait;
 
 /**
@@ -21,14 +21,7 @@ use Es\Services\ServicesTrait;
  */
 class RegistrationListener
 {
-    use ServicesTrait;
-
-    /**
-     * The modules.
-     *
-     * @var \Es\Modules\ModulesInterface
-     */
-    protected $modules;
+    use ModulesTrait, ServicesTrait;
 
     /**
      * The class loader.
@@ -36,32 +29,6 @@ class RegistrationListener
      * @var \Es\Loader\ClassLoader
      */
     protected $loader;
-
-    /**
-     * Sets the modules.
-     *
-     * @param \Es\Modules\ModulesInterface $modules The modules
-     */
-    public function setModules(ModulesInterface $modules)
-    {
-        $this->modules = $modules;
-    }
-
-    /**
-     * Gets the modules.
-     *
-     * @return \Es\Modules\ModulesInterface The modules
-     */
-    public function getModules()
-    {
-        if (! $this->modules) {
-            $services = $this->getServices();
-            $modules  = $services->get('Modules');
-            $this->setModules($modules);
-        }
-
-        return $this->modules;
-    }
 
     /**
      * Sets the class loader.
