@@ -12,7 +12,7 @@ namespace Es\Modules;
 use Es\Services\Provider;
 
 /**
- * The recommended way to interact with modules.
+ * The accessors of Modules.
  */
 trait ModulesTrait
 {
