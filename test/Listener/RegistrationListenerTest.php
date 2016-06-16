@@ -14,18 +14,20 @@ use Es\Modules\AbstractModule;
 use Es\Modules\Listener\RegistrationListener;
 use Es\Modules\Modules;
 use Es\Modules\ModulesEvent;
-use Es\Services\Provider;
 use Es\Services\Services;
+use Es\Services\ServicesTrait;
 
 class RegistrationListenerTest extends \PHPUnit_Framework_TestCase
 {
+    use ServicesTrait;
+
     public function testGetLoader()
     {
         $loader   = new ClassLoader();
         $services = new Services();
         $services->set('ClassLoader', $loader);
 
-        Provider::setServices($services);
+        $this->setServices($services);
         $listener = new RegistrationListener();
         $this->assertSame($loader, $listener->getLoader());
     }
@@ -33,7 +35,7 @@ class RegistrationListenerTest extends \PHPUnit_Framework_TestCase
     public function testSetLoader()
     {
         $services = new Services();
-        Provider::setServices($services);
+        $this->setServices($services);
 
         $loader   = new ClassLoader();
         $listener = new RegistrationListener();

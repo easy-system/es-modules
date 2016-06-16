@@ -13,19 +13,21 @@ use Es\Loader\ModuleLoader;
 use Es\Modules\Listener\LoaderListener;
 use Es\Modules\Modules;
 use Es\Modules\ModulesEvent;
-use Es\Services\Provider;
 use Es\Services\Services;
+use Es\Services\ServicesTrait;
 use Es\System\SystemConfig;
 
 class LoaderListenerTest extends \PHPUnit_Framework_TestCase
 {
+    use ServicesTrait;
+
     public function testGetLoader()
     {
         $loader   = new ModuleLoader();
         $services = new Services();
         $services->set('ModuleLoader', $loader);
 
-        Provider::setServices($services);
+        $this->setServices($services);
         $listener = new LoaderListener();
         $this->assertSame($loader, $listener->getLoader());
     }
@@ -33,7 +35,7 @@ class LoaderListenerTest extends \PHPUnit_Framework_TestCase
     public function testSetLoader()
     {
         $services = new Services();
-        Provider::setServices($services);
+        $this->setServices($services);
 
         $loader   = new ModuleLoader();
         $listener = new LoaderListener();
