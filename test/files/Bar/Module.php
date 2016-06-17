@@ -13,4 +13,8 @@ use Es\Modules\AbstractModule;
 
 class Module extends AbstractModule
 {
+    public function getVersion()
+    {
+        return '0.0.0';
+    }
 }

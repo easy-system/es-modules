@@ -32,6 +32,13 @@ abstract class AbstractModule
     private $config;
 
     /**
+     * Gets the version of module.
+     *
+     * @return string The version of module in format "X.Y.Z"
+     */
+    abstract public function getVersion();
+
+    /**
      * Bootstrap the module.
      *
      * If your module need bootstrap, you can override this method in your
