@@ -16,12 +16,12 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $files        = __DIR__ . DIRECTORY_SEPARATOR . 'files';
-        $this->fooDir = $files . DIRECTORY_SEPARATOR . 'Foo';
-        $this->barDir = $files . DIRECTORY_SEPARATOR . 'Bar';
+        $files        = __DIR__ . PHP_DS . 'files';
+        $this->fooDir = $files . PHP_DS . 'Foo';
+        $this->barDir = $files . PHP_DS . 'Bar';
 
-        require_once $this->fooDir . DIRECTORY_SEPARATOR . 'Module.php';
-        require_once $this->barDir . DIRECTORY_SEPARATOR . 'Module.php';
+        require_once $this->fooDir . PHP_DS . 'Module.php';
+        require_once $this->barDir . PHP_DS . 'Module.php';
     }
 
     public function testGetModuleDir()
@@ -41,8 +41,8 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     public function testGetConfigReturnsConfig()
     {
         $foo        = new \Foo\Module();
-        $configDir  = $this->fooDir . DIRECTORY_SEPARATOR . 'config';
-        $configFile = $configDir . DIRECTORY_SEPARATOR . 'system.config.php';
+        $configDir  = $this->fooDir . PHP_DS . 'config';
+        $configFile = $configDir . PHP_DS . 'system.config.php';
         $config     = (array) require $configFile;
         $this->assertSame($config, $foo->getConfig());
     }

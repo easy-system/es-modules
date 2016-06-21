@@ -53,7 +53,7 @@ class RegistrationListener
         $modules = $this->getModules();
         $loader  = $this->getLoader();
         foreach ($modules as $namespace => $module) {
-            $path = $module->getModuleDir() . DIRECTORY_SEPARATOR . 'src';
+            $path = $module->getModuleDir() . PHP_DS . 'src';
             $loader->registerPath($namespace, $path);
         }
     }

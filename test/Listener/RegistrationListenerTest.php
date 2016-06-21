@@ -46,7 +46,7 @@ class RegistrationListenerTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         $module = $this->getMock(AbstractModule::CLASS);
-        $src    = $module->getModuleDir() . DIRECTORY_SEPARATOR . 'src';
+        $src    = $module->getModuleDir() . PHP_DS . 'src';
 
         $loader  = $this->getMock(ClassLoader::CLASS);
         $modules = new Modules();

@@ -46,7 +46,7 @@ class LoaderListenerTest extends \PHPUnit_Framework_TestCase
     public function testInvoke()
     {
         $initialConfig = [
-            'vendors' => __DIR__ . DIRECTORY_SEPARATOR . 'files',
+            'vendors' => __DIR__ . PHP_DS . 'files',
             'modules' => [
                 'Foo',
                 'Bar',

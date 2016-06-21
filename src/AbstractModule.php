@@ -78,8 +78,9 @@ abstract class AbstractModule
         if (null === $this->config) {
             $this->config = [];
 
-            $configDir  = $this->getModuleDir() . DIRECTORY_SEPARATOR . 'config';
-            $configFile = $configDir . DIRECTORY_SEPARATOR . 'system.config.php';
+            $configFile = $this->getModuleDir() . PHP_DS . 'config'
+                        . PHP_DS . 'system.config.php';
+
             if (file_exists($configFile)) {
                 $this->config = (array) require $configFile;
             }

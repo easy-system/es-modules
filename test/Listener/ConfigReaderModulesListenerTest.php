@@ -18,10 +18,7 @@ class ConfigReaderModulesListenerTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $files  = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'files';
-        $foo    = $files . DIRECTORY_SEPARATOR . 'Foo';
-        $module = $foo . DIRECTORY_SEPARATOR . 'Module.php';
-        require_once $module;
+        require_once dirname(__DIR__) . PHP_DS . 'files' . PHP_DS . 'Foo' . PHP_DS . 'Module.php';
     }
 
     public function testInvoke()
