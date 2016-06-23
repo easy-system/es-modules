@@ -38,7 +38,6 @@ class Component implements ComponentInterface
         'Es.Modules.Listener.CacheConfigListener'          => 'Es\Modules\Listener\CacheConfigListener',
         'Es.Modules.Listener.ConfigReaderAutoloadListener' => 'Es\Modules\Listener\ConfigReaderAutoloadListener',
         'Es.Modules.Listener.ConfigReaderModulesListener'  => 'Es\Modules\Listener\ConfigReaderModulesListener',
-        'Es.Modules.Listener.BootstrapListener'            => 'Es\Modules\Listener\BootstrapListener',
         'Es.Modules.Listener.ConfigureServicesListener'    => 'Es\Modules\Listener\ConfigureServicesListener',
         'Es.Modules.Listener.ConfigureListenersListener'   => 'Es\Modules\Listener\ConfigureListenersListener',
         'Es.Modules.Listener.ConfigureEventsListener'      => 'Es\Modules\Listener\ConfigureEventsListener',
@@ -109,12 +108,6 @@ class Component implements ComponentInterface
             'Es.Modules.Listener.ConfigureEventsListener',
             '__invoke',
             9000
-        ],
-        'BootstrapListener::__invoke' => [
-            ModulesEvent::BOOTSTRAP,
-            'Es.Modules.Listener.BootstrapListener',
-            '__invoke',
-            1000
         ],
     ];
 

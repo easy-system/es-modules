@@ -39,21 +39,6 @@ abstract class AbstractModule
     abstract public function getVersion();
 
     /**
-     * Bootstrap the module.
-     *
-     * If your module need bootstrap, you can override this method in your
-     * module.
-     *
-     * @codeCoverageIgnore
-     *
-     * @param \Es\Services\ServicesInterface $services The services
-     */
-    public function bootstrap(ServicesInterface $services)
-    {
-        // TODO: Your code here
-    }
-
-    /**
      * Gets the module directory.
      *
      * @return string The module directory
