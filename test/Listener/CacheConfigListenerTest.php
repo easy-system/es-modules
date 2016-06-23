@@ -9,7 +9,7 @@
  */
 namespace Es\Modules\Test\Listener;
 
-use Es\Cache\Adapter\AbstractCache;
+use Es\Cache\AbstractCache;
 use Es\Modules\Listener\CacheConfigListener;
 use Es\Modules\ModulesEvent;
 use Es\Services\Services;
